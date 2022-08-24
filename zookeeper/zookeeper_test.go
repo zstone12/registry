@@ -52,7 +52,7 @@ func TestZookeeperRegistryWithHertz(t *testing.T) {
 	})
 	go h.Spin()
 
-	time.Sleep(5 * time.Second)
+	time.Sleep(1 * time.Second)
 
 	// register
 	newClient, _ := client.NewClient()
@@ -79,6 +79,8 @@ func TestZookeeperRegistryWithHertz(t *testing.T) {
 	assert.EqualError(t, err1, "instance not found")
 	assert.Equal(t, 0, status1)
 	assert.Equal(t, "", string(body1))
+	assert.NotNil(t, err)
+
 }
 
 // TestZookeeperDiscovery Test zookeeper registry complete workflow(service registry|service de-registry|service resolver).
@@ -132,7 +134,6 @@ func TestZookeeperDiscovery(t *testing.T) {
 	assert.Nil(t, err)
 	assert.Empty(t, result.Instances)
 	assert.Equal(t, "product", result.CacheKey)
-	assert.NotNil(t, err)
 }
 
 // TestZookeeperDiscoveryWithAuth Test zookeeper registry with auth complete workflow(service registry|service de-registry|service resolver).
