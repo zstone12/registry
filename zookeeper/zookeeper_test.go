@@ -52,7 +52,7 @@ func TestZookeeperRegistryWithHertz(t *testing.T) {
 	})
 	go h.Spin()
 
-	time.Sleep(1 * time.Second)
+	time.Sleep(500 * time.Millisecond)
 
 	// register
 	newClient, _ := client.NewClient()
