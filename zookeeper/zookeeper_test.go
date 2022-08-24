@@ -35,6 +35,7 @@ import (
 
 // TestZookeeperRegistryWithHertz Test zookeeper registry complete workflow(service registry|service de-registry|service resolver)with hertz.
 func TestZookeeperRegistryWithHertz(t *testing.T) {
+
 	address := "127.0.0.1:8888"
 	r, _ := NewZookeeperRegistry([]string{"127.0.0.1:2181"}, 40*time.Second)
 	srvName := "hertz.test.demo"
@@ -51,7 +52,7 @@ func TestZookeeperRegistryWithHertz(t *testing.T) {
 	})
 	go h.Spin()
 
-	time.Sleep(1 * time.Second)
+	time.Sleep(2 * time.Second)
 
 	// register
 	newClient, _ := client.NewClient()
@@ -72,12 +73,13 @@ func TestZookeeperRegistryWithHertz(t *testing.T) {
 	assert.Nil(t, opt.RegistryInfo.Tags)
 
 	_ = h.Shutdown(context.Background())
-	time.Sleep(5 * time.Second)
+	time.Sleep(6 * time.Second)
 
 	status1, body1, err1 := newClient.Get(context.Background(), nil, addr, config.WithSD(true))
 	assert.EqualError(t, err1, "instance not found")
 	assert.Equal(t, 0, status1)
 	assert.Equal(t, "", string(body1))
+
 }
 
 // TestZookeeperDiscovery Test zookeeper registry complete workflow(service registry|service de-registry|service resolver).
