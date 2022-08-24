@@ -35,6 +35,8 @@ import (
 
 // TestZookeeperRegistryWithHertz Test zookeeper registry complete workflow(service registry|service de-registry|service resolver)with hertz.
 func TestZookeeperRegistryWithHertz(t *testing.T) {
+	time.Sleep(2 * time.Second)
+
 	address := "127.0.0.1:8888"
 	r, _ := NewZookeeperRegistry([]string{"127.0.0.1:2181"}, 40*time.Second)
 	srvName := "hertz.test.demo"
