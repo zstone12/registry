@@ -3,11 +3,13 @@ name: Tests
 on: [ push, pull_request ]
 
 jobs:
-  setup:
-    - name: Set up zookeeper
-      runs: docker run --name zookeeper -p 2181:2181 -d zookeeper:3.7.0
   ut:
     runs-on: ubuntu-latest
+    services:
+      zookeeper:
+        image: 'zookeeper:3.7.0'
+        ports:
+          - '2181:2181'
     steps:
       - uses: actions/checkout@v3
 
@@ -23,7 +25,5 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-go-
 
-
       - name: Unit Test
-        needs: setup
         run: make test
