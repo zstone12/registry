@@ -132,6 +132,7 @@ func TestZookeeperDiscovery(t *testing.T) {
 	assert.Nil(t, err)
 	assert.Empty(t, result.Instances)
 	assert.Equal(t, "product", result.CacheKey)
+	assert.NotNil(t, err)
 }
 
 // TestZookeeperDiscoveryWithAuth Test zookeeper registry with auth complete workflow(service registry|service de-registry|service resolver).
