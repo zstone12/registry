@@ -14,6 +14,7 @@
 
 package consul
 
+//
 import (
 	"context"
 	"fmt"
