@@ -5,14 +5,16 @@ on: [ push, pull_request ]
 jobs:
   ut:
     runs-on: ubuntu-latest
+    networks:
+      consul-net:
 
     services:
       consul:
         image: consul:latest
         ports:
           - '8500:8500'
-        env:
-          net: host
+        networks:
+          - consul-net
       polaris:
         image: polarismesh/polaris-server-standalone:v1.10.0
         ports:
