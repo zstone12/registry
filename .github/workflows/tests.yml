@@ -11,8 +11,8 @@ jobs:
         image: consul:latest
         ports:
           - '8500:8500'
-        networks:
-          - net
+        env:
+          net: host
       polaris:
         image: polarismesh/polaris-server-standalone:v1.10.0
         ports:
@@ -52,6 +52,3 @@ jobs:
 
       - name: Unit Test
         run: make test
-networks:
-  net:
-    driver: bridge
